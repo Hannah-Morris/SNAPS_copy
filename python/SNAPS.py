@@ -5,6 +5,9 @@ Main SNAPS script for assigning an observed shift list based on predicted shifts
 
 @author: aph516
 """
+from SNAPS_importer import SNAPS_importer
+from SNAPS_assigner import SNAPS_assigner
+import logging
 
 def get_arguments(system_args):
     import argparse
@@ -81,9 +84,6 @@ def get_arguments(system_args):
     return(args)
 
 def runSNAPS(system_args):
-    from SNAPS_importer import SNAPS_importer
-    from SNAPS_assigner import SNAPS_assigner
-    import logging
 
     #### Command line arguments
     args = get_arguments(system_args)  
