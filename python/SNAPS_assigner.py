@@ -29,6 +29,7 @@ from sortedcontainers import SortedListWithKey
 #from textwrap import dedent
 import logging
 import yaml
+from pathlib import Path
 
 
 class SNAPS_assigner:
@@ -105,7 +106,13 @@ class SNAPS_assigner:
             missing_pars = required_pars.difference(set(self.pars.keys()))
             self.logger.error("Some required parameters were missing/not imported: %s",
                                 ", ".join(missing_pars))
-        
+
+        par_dir = Path(filename).parent
+
+        for par_name, par in self.pars.items():
+            if par_name.endswith('_file'):
+                self.pars[par_name] = str(par_dir / par)
+
         self.logger.info("Finished reading in config parameters from %s" 
                          % filename)
         return(self.pars)
